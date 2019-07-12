@@ -1,29 +1,31 @@
-#from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from enum import Enum
 
-class Elements(Enum):
-    Gray=0
-    Yellow=1
-    Red=2
-    Blue=3
-    Green=4
-    Orange=5
-    Purple=6
-    Black=7
-    White=8
+class Element(Enum):
+    GRAY=0
+    YELLOW=1
+    RED=2
+    BLUE=3
+    GREEN=4
+    ORANGE=5
+    PURPLE=6
+    BLACK=7
+    WHITE=8
 
-class Actor():
+@dataclass
+class Actor:
     #These three must be from Elements
     #If you want a custom Element for flair, extend a color and rename it.
     #For example, Fire extends Red and Grass extends Green.
-    Weakness=0
-    Strength=0
-    Element=0
+    weak_against: Element
+    strong_against: Element
+    element: Element
 
-    x=0
-    y=0
-    deck=[]
-    scannedMap=[]
+    x: int=0
+    y: int=0
+
+    deck: List[DataChip]
+    scannedMap: List[MapSpace]
 
     #Actions include the following. Only one can be taken on a turn.
     #   Gain board state at end of turn
@@ -32,24 +34,8 @@ class Actor():
     #   Refresh a battle chip
     #   Convert a tile to a color
 
-    #These should probably all be objects. Only functions in here should be things that update the stats of the Actor
-    def teleportTo(x,y):
-        pass
-
-    def convertPanel(x,y,color,currentMap):
-        pass
-
-    def useChip(chip):
-        pass
-
-    def refreshChip(chip):
-        pass
-
-    def scanMap(newMap):
-        pass
-
     #Must return an action object
     #Loops not suggested
-    #Infinite loops will result in doNothing() due to game having a timeOut on calling this function
-    def run():
-        pass
+    #Infinite loops will result in doNothing(self,) due to game having a timeOut on calling this function
+    def getAction(self):
+        raise NotImplementedError

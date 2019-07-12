@@ -31,14 +31,16 @@ class Game():
 
     def __init__(self):
         #fill in actors array with players here
-        self.actors.append()
+        #self.actors.append()
         #remove pass when actors is filled
         pass
 
-    def main():
+    def main(self):
         #iterate through every actor
             #collect their actions
         #weight the actions
         #execute the actions in weighed order
         pass
 
+game = Game()
+game.main()
