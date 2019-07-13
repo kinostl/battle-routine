@@ -24,12 +24,18 @@
 #   Speed, determines turn order
 #   HP?
 
+from mapspace import MapSpace
 
 #import all the players here
 class Game():
     actors=[]
+    game_map=[]
 
     def __init__(self):
+        map_size = 4*len(self.actors)
+        for(x in range(0,map_size)):
+            for(y in range(0,map_size)):
+                self.game_map.append(MapSpace(x,y))
         #fill in actors array with players here
         #self.actors.append()
         #remove pass when actors is filled

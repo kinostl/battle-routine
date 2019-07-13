@@ -1,31 +1,24 @@
 from dataclasses import dataclass
-from enum import Enum
+from typing import List
 
-class Element(Enum):
-    GRAY=0
-    YELLOW=1
-    RED=2
-    BLUE=3
-    GREEN=4
-    ORANGE=5
-    PURPLE=6
-    BLACK=7
-    WHITE=8
+from element import Element
+from datachip import DataChip
+from mapspace import MapSpace
 
 @dataclass
 class Actor:
     #These three must be from Elements
     #If you want a custom Element for flair, extend a color and rename it.
     #For example, Fire extends Red and Grass extends Green.
-    weak_against: Element
-    strong_against: Element
-    element: Element
+    weak_against: Element = Element.GRAY
+    strong_against: Element = Element.GRAY
+    element: Element = Element.GRAY
 
     x: int=0
     y: int=0
 
     deck: List[DataChip]
-    scannedMap: List[MapSpace]
+    scannedMap: List[List[MapSpace]]
 
     #Actions include the following. Only one can be taken on a turn.
     #   Gain board state at end of turn
