@@ -1,0 +1,79 @@
+We have 2 players AIs called "navis". Their names are Rock and Bass.
+Normally we start with a 4n*4n grid with every cell empty and elementless(grey element). For this example, we'll be playing with a 2n*2n grid.
+
+Both players start with 256 energy.
+
+A map is made up of squares. Each square can be given an element. A navi can only teleport to a square of the same color as its body.
+Map squares are the only object in the game that can have the grey element.
+
+Navis do not start with any knowledge.
+
+A navi has:
+    - Energy
+        - Energy is used for executing any action, improving the weight of an action, and improving the strength of an action (where appropriate) 
+    - A deck of Battle Chips (Spells)
+    - An Element they deal extra damage to
+    - An Element they take extra damage from
+    - An Element their body is made of
+
+A navi has the following action options:
+    - Do nothing
+    - Acquire board state
+    - Teleport to a space of the same element as their body
+    - Change the element of any space on the grid
+    - Use a battle chip. Battle chips explained later.
+    - Refresh a battle chip
+
+Battle chips are the only method of attack in the game
+    - They have a pattern and an element
+    - When a battle chip is used, the pattern is drawn around the navi
+    - Any opponent that is in the pattern takes appropriate damage
+    - After a battle chip is used it cannot be used again, unless it is refreshed
+
+
+The game cycle is
+while True:
+	1. Decide actions (Each navi gets 1)
+	2. Weigh actions
+	3. Execute actions
+
+Turn 0. 
+1---
+----
+----
+---2
+
+1. Rock(B/R/G): 256
+2. Bass(Y/B/R): 256
+
+Rock is Blue. He is strong against Red. He is weak against Green.
+Bass is Yellow. He is strong against Blue. He is weak against Red.
+
+Neither player knows what the board state is. They have a few microseconds to decide an action and inform the game of their action. If they do not send one in a timely manner, they will stay where they are and do nothing, forfeiting their turn.
+
+A player can weigh their action and change its priority by spending energy on their action. They can also increase its strength, if appropriate.
+
+Turn 1.
+Neither player has the board state, so they acquire it.
+Turn 1 is complete.
+
+Turn 2.
+    #Decide actions
+        Rock decides to make the square next to Bass blue so that he can teleport to it.
+        Bass decides to make a center square yellow so that he can teleport to it.
+        Neither boost the speed of these actions. Color changing costs 4 energy.
+    #Weight actions
+        Both weights are the same.
+        The actions happen in order.
+    #Execute actions
+        4,3 is blue
+        2,2 is yellow
+
+Turn 3.
+1---
+-Y--
+----
+--B2
+
+1. Rock(B/R/G): 252
+2. Bass(Y/B/R): 252
