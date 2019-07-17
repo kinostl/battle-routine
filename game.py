@@ -24,24 +24,24 @@
 #   Speed, determines turn order
 #   HP?
 
-from mapspace import MapSpace
+from gamemap import GameMap
+from actor import Actor
 
 #import all the players here
 class Game():
     actors=[]
-    game_map=[]
+    game_map=None
 
     def __init__(self):
-        map_size = 4*len(self.actors)
-        for(x in range(0,map_size)):
-            for(y in range(0,map_size)):
-                self.game_map.append(MapSpace(x,y))
-        #fill in actors array with players here
-        #self.actors.append()
-        #remove pass when actors is filled
-        pass
+        self.actors.append(Actor())
+        self.game_map = GameMap(len(self.actors))
 
     def main(self):
+        while len(self.actors) > 1:
+            for actor in self.actors:
+                actor.getAction()
+            pass
+        print("The winner is blank!")
         #iterate through every actor
             #collect their actions
         #weight the actions

@@ -1,12 +1,11 @@
+from dataclasses import dataclass
+
 from element import Element
-from actor import Actor
+from baseactor import BaseActor
 
+@dataclass
 class MapSpace:
-    x=0
-    y=0
-    element = Element.GRAY
-    inhabitant = None
-
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
+    x:int=0
+    y:int=0
+    element: Element = Element.GRAY
+    inhabitant: BaseActor = None
