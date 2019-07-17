@@ -2,7 +2,6 @@ from dataclasses import dataclass
 
 from baseactor import BaseActor
 
-from element import Element
 from datadeck import DataDeck
 from gamemap import GameMap
 
