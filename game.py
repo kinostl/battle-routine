@@ -26,6 +26,7 @@
 
 from gamemap import GameMap
 from actor import Actor
+from action import ActionType
 
 #import all the players here
 class Game():
@@ -34,13 +35,21 @@ class Game():
 
     def __init__(self):
         self.actors.append(Actor())
+        self.actors.append(Actor())
+        self.actors.append(Actor())
         self.game_map = GameMap(len(self.actors))
 
     def main(self):
         print(self.game_map)
         while len(self.actors) > 1:
+            actions = []
             for actor in self.actors:
-                actor.getAction()
+                try:
+                    action = actor.getAction()
+                    actions.append(action)
+                except NotImplementedError:
+                    actions.append(ActionType.DO_NOTHING)
+            print(self.game_map)
         print("The winner is blank!")
         #iterate through every actor
             #collect their actions
